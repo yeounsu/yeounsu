@@ -1,0 +1,9 @@
+<%@page import="org.apache.jasper.compiler.Node.UseBean"%>
+<%@ page contentType="text/html; charset=EUC-KR"%>
+<jsp:UseBean id = "mgr" class = "ch09.TeamMgr"/>
+<jsp:UseBean id = "bean" class = "ch09.TeamBean"/>
+<jsp:setProperty property="*" name="bean"/>
+<%
+	mgr.insertTeam(bean);
+	response.sendRedirect("teamList.jsp");
+	%>

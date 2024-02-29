@@ -1,0 +1,9 @@
+<%@ page contentType="text/html; charset=EUC-KR"%>
+<%
+	
+%>
+로그인입니당
+<jsp:include page="includeTagTop2.jsp" flush="true">
+	<jsp:param  name="id" value="aaa"/>
+	<jsp:param  name="pwd" value="1234"/>
+</jsp:include>

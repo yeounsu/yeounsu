@@ -1,0 +1,32 @@
+package ch12;
+
+import java.sql.Connection;
+
+import ch09.DBConnectionMgr;
+
+public class MemberMgr {
+	private DBConnectionMgr pool;
+	
+	public MemberMgr() {
+		pool = DBConnectionMgr.getInstance();
+		
+	}
+	
+	//로그인: 성공은 true 리턴
+	public boolean loginChk(String id, String pwd) {
+	    Connection con = null;
+	    boolean success = false;
+	    try {
+	        con = pool.getConnection();
+	        sql = "select id,pwd from tblmember"
+	        
+	        success = true;
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	    } finally {
+	        if (con != null) {
+	            pool.freeConnection(con);
+	        }
+	    }
+	    return success;
+	}

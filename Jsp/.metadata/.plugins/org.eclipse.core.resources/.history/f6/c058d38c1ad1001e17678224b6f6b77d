@@ -1,0 +1,17 @@
+<%@ page contentType="text/html; charset=EUC-KR"%>
+<!-- 선언문(Declaration) -->
+<%!
+	//필드선언
+	String dec = "선언문 변수";
+
+	//메소드 선언
+	public String decMethod(){
+		return dec;
+	}
+%>
+<!-- 스크립트릿(Scriptlet) _jspService 구현 -->
+<%
+	String scriptlet = "스크립트릿";
+	out.println("내장 객체를 이용한 출력:" + dec + "<p>");
+	System.out.prinln("서버 콘솔창에 출력");
+%>

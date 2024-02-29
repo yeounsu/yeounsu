@@ -1,0 +1,10 @@
+<%@ page contentType="text/html; charset=EUC-KR"%>
+<%
+	String id = (String)session.getAttribute("idKey");
+	if(id == null){
+		//泅犁 立加等 URL 府畔 
+		StringBuffer url = request.getRequestURL()
+		response.sendRedirect("login.jsp?url="+url);
+		return;
+	}
+%>

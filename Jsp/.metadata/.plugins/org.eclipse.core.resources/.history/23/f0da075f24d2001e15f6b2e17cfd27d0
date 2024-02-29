@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="EUC-KR">
+<title>Insert title here</title>
+</head>
+<body>
+ <form method="post" action="out1.jsp">
+ 아이디 : <input name="id" value="aaa"><p>
+ 비밀번호 : <input type="password" name="pwd" value="1234"><p/>
+<input type="submit" value="로그인">
+
+</body>
+</html>
