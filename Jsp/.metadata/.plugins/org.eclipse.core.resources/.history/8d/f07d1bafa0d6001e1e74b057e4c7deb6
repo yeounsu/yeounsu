@@ -1,6 +1,0 @@
-package ch09;
-
-public class ScopeBean {
-	private int num;
-
-}

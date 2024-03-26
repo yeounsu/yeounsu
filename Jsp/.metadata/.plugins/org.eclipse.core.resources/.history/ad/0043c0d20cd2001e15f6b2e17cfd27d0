@@ -1,7 +1,0 @@
-
-<%@ page contentType="text/html; charset=EUC-KR"%>
-<%
-//name이라는 이름의 객체를 받아오겠다 (includeTang.html에서)
-	String name = request.getParameter("name");	
-%>
-<jsp:include page="includeTagTop1.jsp" flush="true"/>

@@ -1,6 +1,0 @@
-<%@ page contentType="text/html; charset=EUC-KR"%>
-<%
-	String id = request.getParameter("id");
-	String pwd = request.getParameter("pwd");
-%>
-<jsp:forward page = "forward1_2.jsp"/>
