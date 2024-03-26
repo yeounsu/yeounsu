@@ -1,0 +1,23 @@
+package onedaybacking;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.text.SimpleDateFormat;
+import java.util.Vector;
+
+import guestbook.DBConnectionMgr;
+import guestbook.GuestBookBean;
+
+public class addclassMgr {
+	
+	private DBConnectionMgr pool;
+	public addclassMgr() {
+		pool = DBConnectionMgr.getInstance();
+	}
+	public void insertGuestBook(GuestBookBean bean) {
+		
+	}
+    }
+
+

@@ -1,0 +1,91 @@
+<%@ page contentType="text/html; charset=UTF-8" %>
+<!DOCTYPE html>
+<html>
+<head>
+    <title>강의 등록</title>
+    <link href="style.css" rel="stylesheet" type="text/css">
+    <style>
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="button-container">
+        <button id="btnPanel1" onclick="showPanel('panel1', 'btnPanel1')">강의 등록</button>
+        <button id="btnPanel2" onclick="showPanel('panel2', 'btnPanel2')">강사 등록</button>
+    </div>
+
+    <div id="panel1" class="panel-container active">
+        <%@ include file="panel1.jsp" %>
+        <div class="button-group">
+            <button onclick="showPreviousPanel('panel1', 'btnPanel1')">이전</button>
+            <button onclick="showNextPanel('panel1', 'panel3', 'btnPanel1')">다음</button>
+        </div>
+    </div>
+
+    <div id="panel2" class="panel-container">
+        <%@ include file="panel2.jsp" %>
+        <div class="button-group">
+            <button onclick="showPreviousPanel('panel2', 'btnPanel2')">이전</button>
+            <!-- 다음 패널로 가는 버튼 -->
+        </div>
+    </div>
+
+    <div id="panel3" class="panel-container">
+        <%@ include file="panel3.jsp" %>
+        <div class="button-group">
+            <button onclick="showPreviousPanel('panel3', 'btnPanel1')">이전</button>
+            <!-- 다음 패널로 가는 버튼 -->
+        </div>
+    </div>
+</div>
+
+<script>
+    function showPanel(panelId, buttonId) {
+        var panels = document.querySelectorAll('.panel-container');
+        panels.forEach(function (panel) {
+            panel.classList.remove('active');
+        });
+
+        var buttons = document.querySelectorAll('.button-container button');
+        buttons.forEach(function (button) {
+            button.classList.remove('active');
+        });
+
+        var currentPanel = document.getElementById(panelId);
+        currentPanel.classList.add('active');
+
+        var currentButton = document.getElementById(buttonId);
+        currentButton.classList.add('active');
+    }
+
+    function showNextPanel(currentPanelId, nextPanelId, nextButtonId) {
+        // 현재 패널과 버튼 비활성화
+        document.getElementById(currentPanelId).classList.remove('active');
+        document.getElementById(nextButtonId).classList.remove('active');
+
+        // 다음 패널과 버튼 활성화
+        document.getElementById(nextPanelId).classList.add('active');
+        document.getElementById(nextButtonId).classList.add('active');
+    }
+
+    function showPreviousPanel(currentPanelId, currentButtonId) {
+        // 첫 번째 패널인 경우에는 이전 패널이 없으므로 알림창 띄우기
+        if (currentPanelId === 'panel1') {
+            alert('첫 번째 페이지입니다.');
+            return;
+        }
+
+        // 현재 패널과 버튼 비활성화
+        document.getElementById(currentPanelId).classList.remove('active');
+        document.getElementById(currentButtonId).classList.remove('active');
+
+        // 이전 패널과 버튼 활성화
+        var previousPanelId = currentPanelId === 'panel3' ? 'panel2' : 'panel1';
+        var previousButtonId = currentButtonId === 'btnPanel2' ? 'btnPanel2' : 'btnPanel1';
+        document.getElementById(previousPanelId).classList.add('active');
+        document.getElementById(previousButtonId).classList.add('active');
+    }
+</script>
+</body>
+</html>

@@ -1,0 +1,27 @@
+package onedaybacking;
+
+public class addclassBean {
+private int classkey;
+private String memberId;
+private String classname;
+private String classdate;
+private int classmin;
+private int classmax;
+private int classprice;
+private int classtime;
+private String addressdetail;
+private int categorykey;
+private String offercontent;
+private String classtatus;
+private String classdelete;
+private String classteacherinfo;
+private String classteacherimg;
+private String classimg1;
+private String classimg2;
+private String classimg3;
+private String classimg4;
+private String classimg5;
+private String classcontent;
+private String roomimg1;
+private String roomimg2;
+}

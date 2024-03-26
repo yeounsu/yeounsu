@@ -1,0 +1,38 @@
+package onedaybacking;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.text.SimpleDateFormat;
+import java.util.Vector;
+
+import guestbook.DBConnectionMgr;
+import guestbook.GuestBookBean;
+
+public class addclassMgr {
+	
+	private DBConnectionMgr pool;
+	public addclassMgr() {
+		pool = DBConnectionMgr.getInstance();
+	}
+	   public static void insertClass(addclassBean classBean) {
+	   Connection con = null;
+	PreparedStatement pstmt = null;
+	ResultSet rs = null;
+	String sql = null;
+	try {
+		con = pool.getConnection();
+		sql = "";
+		pstmt = con.prepareStatement(sql);
+
+		rs = pstmt.executeQuery();
+	} catch (Exception e) {
+		e.printStackTrace();
+	} finally {
+		pool.freeConnection(con, pstmt, rs);
+	}
+	   }
+	   }
+    
+
+

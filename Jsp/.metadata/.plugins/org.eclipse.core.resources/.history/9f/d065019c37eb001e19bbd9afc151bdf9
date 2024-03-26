@@ -1,0 +1,6 @@
+package onedaybacking;
+
+public class addclassBean {
+private int classkey,
+private String memberId,
+}

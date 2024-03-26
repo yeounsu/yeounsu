@@ -1,0 +1,100 @@
+<%@ page contentType="text/html; charset=UTF-8" %>
+<!DOCTYPE html>
+<html>
+<head>
+    <title>버튼 예제</title>
+    <link href="style.css" rel="stylesheet" type="text/css">
+    <style>
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 50px;
+        }
+
+        .button-container {
+            display: flex;
+            margin-bottom: 20px; /* 버튼 아래 여백 조절 */
+        }
+
+        .button-container button {
+            margin: 0 150px; /* 버튼 간격 조절 */
+            background-color: transparent;
+            border: none;
+            outline: none;
+            cursor: pointer;
+            font-size: 20px;
+            text-decoration: none;
+            color: black;
+            position: relative;
+        }
+        .button-container::after { /* 가상 요소를 사용하여 선 그리기 */
+            content: "";
+            position: absolute;
+            bottom: -2px; /* 버튼 아래에 위치 */
+            left: 0;
+            width: 100%;
+            border-bottom: 2px solid #ccc; /* 회색 선 */
+        }
+        
+       
+
+        .panel-container {
+            display: none; /* 초기에는 보이지 않음 */
+            padding: 10px;
+            margin-top: 30px;
+            width: 50%; /* 전체 너비로 설정 */
+            box-sizing: border-box; /* 패딩, 보더 포함 */
+        }
+
+        .panel-container.active {
+            display: block; /* 버튼 클릭 시 보이도록 함 */
+        }
+
+        .panel-container input {
+            width: 200px;
+            padding: 5px;
+            margin-top: 5px;
+        }
+    </style>
+</head>
+<body>
+    <h1>강의 등록하기</h1>
+
+    <div class="container">
+        <div class="button-container">
+            <button id="btnPanel1" class="active" onclick="showPanel('panel1', 'btnPanel1')">강의 등록</button>
+            <button id="btnPanel2" onclick="showPanel('panel2', 'btnPanel2')">강사 등록</button>
+            
+        </div>
+
+        <div id="panel1" class="panel-container active">
+            <%@ include file="panel1.jsp" %>
+        </div>
+
+        <div id="panel2" class="panel-container">
+            <%@ include file="panel2.jsp" %>
+        </div>
+    </div>
+
+    <script>
+    function showPanel(panelId, buttonId) {
+        var panels = document.querySelectorAll('.panel-container');
+        panels.forEach(function(panel) {
+            panel.classList.remove('active');
+        });
+
+        var buttons = document.querySelectorAll('.button-container button');
+        buttons.forEach(function(button) {
+            button.classList.remove('active');
+        });
+
+        var currentPanel = document.getElementById(panelId);
+        currentPanel.classList.add('active');
+
+        var currentButton = document.getElementById(buttonId);
+        currentButton.classList.add('active');
+    }
+</script>
+</body>
+</html>

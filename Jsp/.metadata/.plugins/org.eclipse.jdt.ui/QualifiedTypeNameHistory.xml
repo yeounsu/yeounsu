@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<qualifiedTypeNameHistroy>
+    <fullyQualifiedTypeName name="ch09.DBConnectionMgr"/>
+    <fullyQualifiedTypeName name="com.mysql.cj.xdevapi.Result"/>
+    <fullyQualifiedTypeName name="guestbook.GuestBookBean"/>
+    <fullyQualifiedTypeName name="ch14.MemberBean"/>
+    <fullyQualifiedTypeName name="java.lang.Override"/>
+    <fullyQualifiedTypeName name="javax.servlet.ServletConfig"/>
+    <fullyQualifiedTypeName name="java.io.File"/>
+    <fullyQualifiedTypeName name="ch13.UtilMgr"/>
+    <fullyQualifiedTypeName name="ch14.MemberMgr"/>
+    <fullyQualifiedTypeName name="ch14.DBConnectionMgr"/>
+    <fullyQualifiedTypeName name="ch15.UtilMgr"/>
+    <fullyQualifiedTypeName name="ch15.DBConnectionMgr"/>
+    <fullyQualifiedTypeName name="ch15.BoardBean"/>
+    <fullyQualifiedTypeName name="javax.servlet.http.HttpSession"/>
+    <fullyQualifiedTypeName name="java.io.PrintWriter"/>
+    <fullyQualifiedTypeName name="ch16.DBConnectionMgr"/>
+    <fullyQualifiedTypeName name="ch16.PollItemBean"/>
+    <fullyQualifiedTypeName name="java.beans.beancontext.BeanContextMembershipEvent"/>
+    <fullyQualifiedTypeName name="ch16.PollListBean"/>
+    <fullyQualifiedTypeName name="java.util.Hashtable"/>
+    <fullyQualifiedTypeName name="java.sql.Connection"/>
+    <fullyQualifiedTypeName name="java.sql.PreparedStatement"/>
+    <fullyQualifiedTypeName name="org.apache.jasper.compiler.Node.GetProperty"/>
+    <fullyQualifiedTypeName name="java.sql.Date"/>
+    <fullyQualifiedTypeName name="java.util.Date"/>
+    <fullyQualifiedTypeName name="java.text.DateFormat"/>
+    <fullyQualifiedTypeName name="java.sql.ResultSet"/>
+    <fullyQualifiedTypeName name="shop.OrderBean"/>
+    <fullyQualifiedTypeName name="shop.GmailSend"/>
+    <fullyQualifiedTypeName name="com.oreilly.servlet.multipart.DefaultFileRenamePolicy"/>
+    <fullyQualifiedTypeName name="com.oreilly.servlet.MultipartRequest"/>
+    <fullyQualifiedTypeName name="java.util.Vector"/>
+    <fullyQualifiedTypeName name="javax.servlet.http.HttpServletRequest"/>
+    <fullyQualifiedTypeName name="ch19.PBlogMgr"/>
+    <fullyQualifiedTypeName name="java.lang.Integer"/>
+    <fullyQualifiedTypeName name="ch19.PReplyMgr"/>
+    <fullyQualifiedTypeName name="org.apache.tomcat.jni.Pool"/>
+    <fullyQualifiedTypeName name="java.sql.SQLException"/>
+    <fullyQualifiedTypeName name="onedaybacking.addclassBean"/>
+    <fullyQualifiedTypeName name="javax.imageio.plugins.tiff.GeoTIFFTagSet"/>
+</qualifiedTypeNameHistroy>

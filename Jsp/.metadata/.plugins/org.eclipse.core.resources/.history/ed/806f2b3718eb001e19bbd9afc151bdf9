@@ -1,0 +1,110 @@
+.button-container button.active {
+    color: #C57B37; /* 클릭된 버튼의 색상 변경 */
+}
+ .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 50px;
+        }
+
+        .button-container {
+            display: flex;
+            margin-bottom: 20px; /* 버튼 아래 여백 조절 */
+            position: relative; /* 자식 요소를 기준으로 선을 그리기 위해 */
+        }
+
+        .button-container button {
+            margin: 0 150px; /* 버튼 간격 조절 */
+            background-color: transparent;
+            border: none;
+            outline: none;
+            cursor: pointer;
+            font-size: 18px;
+            text-decoration: none;
+            color: black;
+            position: relative; /* 자식 요소를 기준으로 선을 그리기 위해 */
+        }
+
+        .button-container::after { /* 가상 요소를 사용하여 선 그리기 */
+            content: "";
+            position: absolute;
+            bottom: -15px; /* 버튼 아래에 위치 */
+            left: 0;
+            width: 100%;
+            border-bottom: 1px solid #ccc; /* 회색 선 */
+        }
+
+        .panel-container {
+            display: none; /* 초기에는 보이지 않음 */
+            border: 1px solid #ccc;
+            padding: 10px;
+            margin-top: 30px;
+            width: 50%; /* 전체 너비로 설정 */
+            box-sizing: border-box; /* 패딩, 보더 포함 */
+        }
+
+        .panel-container.active {
+            display: block; /* 버튼 클릭 시 보이도록 함 */
+        }
+
+        .panel-container input {
+            width: 200px;
+            padding: 5px;
+            margin-top: 5px;
+        }
+
+        /* 초기에 활성화된 버튼 스타일 */
+        #btnPanel1 {
+            color: #C57B37; /* 활성화된 버튼 색상 변경 */
+        }
+          #notice {
+        background-color: #E2BD9B;
+        width: 100%; 
+        display: inline-block;
+        padding: 5px; 
+        margin-bottom: 15px;	
+    }
+    
+    #classname{
+     margin-top: 10px;
+    	width:90%;
+    	border-radius: 5px;
+    }	
+    #must{
+    color: red;
+    }
+    #submust{
+    color: black;
+    }
+    #cate1{
+    width:45%;
+    border-radius: 5px;
+    height: 35px;
+    }
+    #cate2{
+    width:45%;
+    border-radius: 5px;
+    height: 35px;
+    }
+   #classtitleimg{
+   width: 600%;
+   }
+   #classsubimg{
+   width: 60%;}
+    #classhard{
+     margin-top: 10px;
+    	width:90%;
+    	border-radius: 5px;
+    }	
+    
+    .color {
+  color: E2BD9B;
+}
+.hard-button {
+  padding: 5px 15px 5px 15px;
+  background: #E2BD9B;
+  color: whitesmoke;
+  border: 1px solid #4fbdba;
+  border-radius: 5px;
+}
