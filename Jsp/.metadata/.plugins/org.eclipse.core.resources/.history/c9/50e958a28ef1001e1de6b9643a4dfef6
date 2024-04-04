@@ -1,0 +1,758 @@
+<%@ page contentType="text/html; charset=UTF-8" %>
+<jsp:include page="top.jsp"/>
+<%
+	String id = (String) session.getAttribute("idkey");
+%>
+<!DOCTYPE html>
+<html>
+<head>
+	<title>강의 등록</title>
+	<link href="yeounsu.css" rel="stylesheet" type="text/css">
+	<script src="http://code.jquery.com/jquery-latest.min.js"></script>
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+	<style>
+		.step-section {
+			display: none;
+		}
+		.step-section.active {
+			display: block;
+		}
+		.detailcontainer {
+			display: grid;
+			grid-template-columns: repeat(2, 1fr); 
+			grid-gap: 10px; 
+			border: 1px solid #ccc;
+			width: 700px;
+			left: 100px;'
+			border-color: #E7DBCC; 
+			border-radius: 5px;
+		}
+		.detailitem {
+			display: flex;
+			align-items: center;
+			margin-top: 15px;
+			margin-bottom: 15px;
+		}
+		.button-container2 {
+			text-align: center;
+			justify-content: center;
+			align-items: center;
+		}
+		.custom-button {
+			padding: 10px 70px;
+			display: inline-block;
+			margin: 0 auto;
+			background-color: #884A01; 
+			color: white;
+			border: 1px solid #884A01;
+			border-radius: 10px;
+		}
+		
+	</style>
+</head>
+<body>
+    <div class="container">
+        <div class="button-container">
+            <button id="btnPanel1" class="btnpanel active" onclick="showPanel('panel1', 'btnPanel1')">강의 등록</button>
+            <button id="btnPanel2" class="btnpanel" onclick="showPanel('panel2', 'btnPanel2')">강사 등록</button>
+        </div>
+        <div id="panel1" class="panel-container active">
+			<div id="step1" class="step-section active">
+    			<form id="step1Form" onsubmit="return false;">
+    				<label for="title" style="font-weight: bold; font-size: 14px;">클래스 상세 내용</label><br><br>
+					<label id="notice" for="notice" style="font-size: 14px">클래스 상세 내용을 작성해주세요.</label><br><br>
+					<label for="classnames">클래스 명</label>
+					<label id="must">(필수)</label><br>
+					<input type="text" id="classnames" name="typingname" placeholder="클래스 명을 입력하세요" style="color: gray; width: 100%"><br><br><br>
+					<label for="selectcate">카테고리</label> <br>
+					
+<select id= "cate1" onchange="categoryChange(this)">
+         <option>카테고리를 선택해주세요.</option>
+         <option value="제과">제과</option>
+         <option value="제빵">제빵</option>
+         <option value="커피">커피</option>
+      </select>
+      
+      <select id="cate2">
+         <option>원하는 세부사항을 선택해주세요.</option>
+      </select>
+					<br><br><br><br>
+					<label for="classtitleimg">대표 이미지</label>
+					<label id="must">(필수)</label> <br>
+
+					<div id="image-upload-container" style="position: relative; display: inline-block; width: 50%">
+					    <div id="image-frame" style="width: 100%; height: 200px; border: 2px solid #ccc; cursor: pointer; position: relative;  background-color: #F2F2F2; border-radius: 5px; display: flex; flex-direction: column; justify-content: center; align-items: center;">
+					     	<img id="uploaded-image" src="photoadd.png" style="max-width: 10%; max-height: 10%; " ><br>
+					        클릭하여 이미지를 업로드하세요
+					    </div >
+					    <input type="file" id="image-upload" style="position: absolute; width: 100%; height: 100%; top: 0; left: 0; opacity: 0; cursor: pointer; ">
+					</div>
+
+					<div style="position: absolute; display: inline-block;">
+						<div id="image-upload-container2" style="position: absolute; display: inline-block;">
+							<div>
+								<div id="image-frame2" style="font-size:9px; width: 150px; height: 100px; border: 2px solid #ccc; cursor: pointer; position: relative;  background-color: #F2F2F2; border-radius: 5px; display: flex; flex-direction: column; justify-content: center; align-items: center;">
+									<img id="uploaded-image2" src="photoadd.png" style="max-width: 20%; max-height: 20%; " ><br>
+									클릭하여 이미지를 업로드하세요
+								</div>
+								<input type="file" id="image-upload2" style="position: absolute; width: 100%; height: 50%; top: 0; left: 0; opacity: 0; cursor: pointer; ">
+								<div id="image-frame3" style="font-size:9px; width: 150px; height: 100px; border: 2px solid #ccc; cursor: pointer; position: relative;  background-color: #F2F2F2; border-radius: 5px; display: flex; flex-direction: column; justify-content: center; align-items: center;">
+									<img id="uploaded-image3" src="photoadd.png" style="max-width: 20%; max-height: 20%; " ><br>
+									클릭하여 이미지를 업로드하세요
+								</div>
+								<input type="file" id="image-upload3" style="position: absolute; width: 100%; height: 50%; top: 152; left: 0; opacity: 0; cursor: pointer; ">
+							</div>
+						</div>
+						<div id="image-upload-container2" style="position: absolute; display: inline-block;">
+							<div style="position: absolute; left: 151px;">
+    							<div id="image-frame4" style=" font-size:9px; width: 150px; height: 100px; border: 2px solid #ccc; cursor: pointer; position: relative;  background-color: #F2F2F2; border-radius: 5px; display: flex; flex-direction: column; justify-content: center; align-items: center;">
+     								<img id="uploaded-image4" src="photoadd.png" style="max-width: 20%; max-height: 20%; " ><br>
+									클릭하여 이미지를 업로드하세요
+								</div>
+								<input type="file" id="image-upload4" style="position: absolute; width: 100%; height: 50%; top: 0; left: 0; opacity: 0; cursor: pointer; ">
+								<div id="image-frame5" style=" font-size:9px; width: 150px; height: 100px; border: 2px solid #ccc; cursor: pointer; position: relative;  background-color: #F2F2F2; border-radius: 5px; display: flex; flex-direction: column; justify-content: center; align-items: center;">
+									<img id="uploaded-image5" src="photoadd.png" style="max-width: 20%; max-height: 20%; " ><br>
+									클릭하여 이미지를 업로드하세요
+								</div>
+								<input type="file" id="image-upload5" style="position: absolute; width: 100%; height: 50%; top: 152; left: 0; opacity: 0; cursor: pointer; ">
+							</div>
+						</div>
+					</div>
+					<script>
+					    document.getElementById('image-frame').addEventListener('click', function() {
+					        document.getElementById('image-upload').click();        
+					    });
+					    document.getElementById('image-frame2').addEventListener('click', function() {
+					        document.getElementById('image-upload2').click();
+					    });
+					    document.getElementById('image-frame3').addEventListener('click', function() {
+					        document.getElementById('image-upload3').click();
+					    });
+					    document.getElementById('image-frame4').addEventListener('click', function() {
+					        document.getElementById('image-upload4').click();
+					    });
+					    document.getElementById('image-frame5').addEventListener('click', function() {
+					        document.getElementById('image-upload5').click();
+					    });
+					
+					    document.getElementById('image-upload').addEventListener('change', function() {
+					        var file = this.files[0];
+					        if (file) {
+					            var reader = new FileReader();
+					            reader.onload = function(e) {
+					                document.getElementById('image-frame').innerHTML = '<img src="' + e.target.result + '" style="max-width: 100%; max-height: 100%;">';
+					            };
+					            reader.readAsDataURL(file);
+					        }
+					    });
+					    document.getElementById('image-upload2').addEventListener('change', function() {
+					        var file = this.files[0];
+					        if (file) {
+					            var reader = new FileReader();
+					            reader.onload = function(e) {
+					                document.getElementById('image-frame2').innerHTML = '<img src="' + e.target.result + '" style="max-width: 100%; max-height: 100%;">';
+					            };
+					            reader.readAsDataURL(file);
+					        }
+					    });
+					    document.getElementById('image-upload3').addEventListener('change', function() {
+					        var file = this.files[0];
+					        if (file) {
+					            var reader = new FileReader();
+					            reader.onload = function(e) {
+					                document.getElementById('image-frame3').innerHTML = '<img src="' + e.target.result + '" style="max-width: 100%; max-height: 100%;">';
+					            };
+					            reader.readAsDataURL(file);
+					        }
+					    });
+					    document.getElementById('image-upload4').addEventListener('change', function() {
+					        var file = this.files[0];
+					        if (file) {
+					            var reader = new FileReader();
+					            reader.onload = function(e) {
+					                document.getElementById('image-frame4').innerHTML = '<img src="' + e.target.result + '" style="max-width: 100%; max-height: 100%;">';
+					            };
+					            reader.readAsDataURL(file);
+					        }
+					    });
+					    document.getElementById('image-upload5').addEventListener('change', function() {
+					        var file = this.files[0];
+					        if (file) {
+					            var reader = new FileReader();
+					            reader.onload = function(e) {
+					                document.getElementById('image-frame5').innerHTML = '<img src="' + e.target.result + '" style="max-width: 100%; max-height: 100%;">';
+					            };
+					            reader.readAsDataURL(file);
+					        }
+					    });
+					</script>
+					<br><br><br>
+					<label for="classhard">수업 난이도</label>
+	<label id="must">(필수)</label><br>
+	<div class="btn-group" role="group" aria-label="Basic radio toggle button group" style="width:100%">
+  	 	<input type="radio" class="btn-check" name="difficulty" id="btnradio1" value="초급" autocomplete="off" checked>
+    	<label class="btn btn-outline-primary" for="btnradio1">초급</label>
+    
+    	<input type="radio" class="btn-check" name="difficulty" id="btnradio2" value="중급" autocomplete="off">
+    	<label class="btn btn-outline-primary" for="btnradio2">중급</label>
+    
+    	<input type="radio" class="btn-check" name="difficulty" id="btnradio3" value="고급" autocomplete="off">
+    	<label class="btn btn-outline-primary" for="btnradio3">고급</label>
+	</div>
+					<br><br><br>
+					<label for="classfortime">수업 소요시간</label>
+					<label id="must">(필수)</label><br>
+					<input type="text" id="classtimes" name="classtime" placeholder="30분 단위로 적어주세요 ex) 150" style="color: gray; width: 100%"><br><br><br><br><br>
+   					<table>
+						<tbody>
+							<tr>
+								<td rowspan="2"><label for="classfortime">수업 소요시간</label>
+								<label id="must">(필수) &nbsp; &nbsp; &nbsp;</label> </td>
+								<td colspan="2" style="text-align: center;" >최소 인원</td>
+								<td style="text-align: center;">최대 인원</td>
+							</tr>
+							<tr>
+								<td><input type="text" id="minPerson" name="minPerson" placeholder="명" style="color: gray; text-align: right;"></td>
+								<td>&nbsp;</td>
+								<td><input type="text" id="maxPerson" name="maxPerson" placeholder="명" style="color: gray; text-align: right;"></td>
+							</tr>
+						</tbody>
+					</table>
+					<br><br><br>
+					<label for="classfortime">1인 수강금액</label>
+					<label id="must">(필수)</label><br>
+					<input type="text" id="price" name="price" placeholder="원" style="color: gray;text-align: right; width: 100%"><br><br><br><br><br><br>
+			        <div class="button-container2">
+			        	<button class="custom-button" onclick="nextStep(1)">다음</button>
+	        		</div>
+				</form>
+			</div>
+
+			<!-- step 2 -->
+			<div class="step-section" id="step2"> 
+				<form id="step2Form" onsubmit="return false;">
+					<label for="title" style="font-weight: bold; font-size: 14px;">클래스 상세 내용</label><br><br>
+					<label id="notice" for="notice" style="font-size: 14px">클래스 상세 내용에 들어갈 이미지를 등록해주세요.</label><br><br><br><br>
+					<label for="classtitleimg" style="position: relative; left: 60px;">클래스 상세 내용 이미지</label>
+					<label id="must" style="position: relative; left: 60px;" >(필수)</label> <br>
+		
+					<div id="image-upload-container3" style="position: relative; display: inline-block; left: 60px;"> <br>
+						<div id="image-frame6" style="width: 500px; height: 350px; border: 2px solid #ccc; cursor: pointer; position: relative;  background-color: #F2F2F2; border-radius: 5px; display: flex; flex-direction: column; justify-content: center; align-items: center;">
+							<img id="uploaded-image6" src="photoadd.png" style="max-width: 10%; max-height: 10%; " >
+							<br>클릭하여 이미지를 업로드하세요
+						</div>
+						<input type="file" id="image-upload6" style="position: absolute; width: 100%; height: 100%; top: 0; left: 0; opacity: 0; cursor: pointer; ">
+					</div>
+					<script>
+						document.getElementById('image-frame6').addEventListener('click', function() {
+						        document.getElementById('image-upload6').click();        
+						    });
+						    
+						document.getElementById('image-upload6').addEventListener('change', function() {
+						    var file = this.files[0];
+						    if (file) {
+						        var reader = new FileReader();
+						        reader.onload = function(e) {
+						            document.getElementById('image-frame6').innerHTML = '<img src="' + e.target.result + '" style="max-width: 100%; max-height: 100%;">';
+						        };
+						        reader.readAsDataURL(file);
+						    }
+						});
+					</script>
+					<label for="classdetailtitleimg" style="position: relative; left: 60px; font-size: 10px; color: gray;"> 이미지 사이즈는 ?:?% 이에요. (넓이 사이즈가 맞지 않으면 이미지가 잘리거나 뭉개질 수 있어요.) </label><br><br><br>
+					<div class="button-container2">
+						<button class="custom-button" onclick="previousStep(2)">이전</button>
+						<button class="custom-button" onclick="nextStep(2)">다음</button>
+					</div>
+				</form>
+			</div>
+
+			<!-- step 3 -->
+			<div class="step-section" id="step3">
+    			<form id="step3Form" onsubmit="return false;">
+					<label for="title" style="font-weight: bold; font-size: 14px;">공간정보</label><br><br>
+    				<label id="notice" for="notice" style="font-size: 14px">클래스 공간을 소개해주세요.</label><br><br><br>
+					<label for="classtitleimg" style="position: relative; ">공간 사진</label>
+					<label id="must" style="position: relative; " >(필수)</label> <br>
+					<div id="image-upload-container8" style="position: relative; display: inline-block; left:30px; "> <br>
+    					<div id="image-frame8" style="width: 300px; height: 200px; border: 2px solid #ccc; cursor: pointer; position: relative;  background-color: #F2F2F2; border-radius: 5px; display: flex; flex-direction: column; justify-content: center; align-items: center;">
+							<img id="uploaded-image8" src="photoadd.png" style="max-width: 10%; max-height: 10%; " >
+	     					프로필<br>
+    					</div>
+    					<input type="file" id="image-upload8" style="position: absolute; width: 100%; height: 100%; top: 0; left: 0; opacity: 0; cursor: pointer; ">
+					</div>
+					<script>
+						document.getElementById('image-frame8').addEventListener('click', function() {
+						        document.getElementById('image-upload8').click();        
+						    });
+						    
+						document.getElementById('image-upload8').addEventListener('change', function() {
+						    var file = this.files[0];
+						    if (file) {
+						        var reader = new FileReader();
+						        reader.onload = function(e) {
+						            document.getElementById('image-frame8').innerHTML = '<img src="' + e.target.result + '" style="max-width: 100%; max-height: 100%;">';
+						        };
+						        reader.readAsDataURL(file);
+						    }
+						});
+					</script>
+					<div id="image-upload-container9" style="position: relative; display: inline-block; left:30px; "> <br>
+					    <div id="image-frame9" style="width: 300px; height: 200px; border: 2px solid #ccc; cursor: pointer; position: relative;  background-color: #F2F2F2; border-radius: 5px; display: flex; flex-direction: column; justify-content: center; align-items: center;">
+						    <img id="uploaded-image9" src="photoadd.png" style="max-width: 10%; max-height: 10%; " >
+						    프로필<br>
+					    </div >
+					    <input type="file" id="image-upload9" style="position: absolute; width: 100%; height: 100%; top: 0; left: 0; opacity: 0; cursor: pointer; ">
+					</div>
+					<script>
+						document.getElementById('image-frame9').addEventListener('click', function() {
+						        document.getElementById('image-upload9').click();        
+						    });
+						    
+						document.getElementById('image-upload9').addEventListener('change', function() {
+						    var file = this.files[0];
+						    if (file) {
+						        var reader = new FileReader();
+						        reader.onload = function(e) {
+						            document.getElementById('image-frame9').innerHTML = '<img src="' + e.target.result + '" style="max-width: 100%; max-height: 100%;">';
+						        };
+						        reader.readAsDataURL(file);
+						    }
+						});
+					</script>
+					<br><br>
+					<div>
+						<input type="text" id="sample5_address" placeholder="주소" style="width:600px;">
+						<input type="text" id="addressdetails" placeholder="자세한 주소를 입력해주세요." style="width:400px;">
+						<input type="button" onclick="sample5_execDaumPostcode()" value="주소 검색"><br>
+						<div id="mapa" style="width:500px;height:350px;"></div>
+
+<script src="//dapi.kakao.com/v2/maps/sdk.js?appkey=1bd0a165f1e8751b8f19a0ed46c8942b&libraries=services"></script>
+<script>
+var mapContainers = document.getElementById('mapa'), // 지도를 표시할 div 
+    mapOptions = {
+        center: new kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
+        level: 3 // 지도의 확대 레벨
+    };  
+
+// 지도를 생성합니다    
+var maps = new kakao.maps.Map(mapContainers, mapOptions); 
+
+// 주소-좌표 변환 객체를 생성합니다
+var geocoders = new kakao.maps.services.Geocoder();
+
+// 주소로 좌표를 검색합니다
+geocoders.addressSearch('부산 부산진구 가야대로 지하 554', function(result, status) {
+
+    // 정상적으로 검색이 완료됐으면 
+     if (status === kakao.maps.services.Status.OK) {
+
+        var coordss = new kakao.maps.LatLng(result[0].y, result[0].x);
+
+        // 결과값으로 받은 위치를 마커로 표시합니다
+        var markers = new kakao.maps.Marker({
+            map: maps,
+            position: coordss
+        });
+
+        // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
+        map.setCenter(coordss);
+    } 
+});
+</script>
+						<div id="map" style="width:500px;height:400px;margin-top:10px;display:none"></div>
+						<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+						<script src="http://code.jquery.com/jquery-latest.min.js"></script>
+						<script>					
+						    var mapContainer = document.getElementById('map'), // 지도를 표시할 div
+						        mapOption = {
+						            center: new daum.maps.LatLng(37.537187, 127.005476), // 지도의 중심좌표
+						            level: 5 // 지도의 확대 레벨
+						        };
+						
+						    //지도를 미리 생성
+						    var map = new daum.maps.Map(mapContainer, mapOption);
+						    //주소-좌표 변환 객체를 생성
+						    var geocoder = new daum.maps.services.Geocoder();
+						    //마커를 미리 생성
+						    var marker = new daum.maps.Marker({
+						        position: new daum.maps.LatLng(37.537187, 127.005476),
+						        map: map
+						    });
+						
+						    
+						    function sample5_execDaumPostcode() {
+						        new daum.Postcode({
+						            oncomplete: function(data) {
+						                var addr = data.address; // 최종 주소 변수
+						
+						                // 주소 정보를 해당 필드에 넣는다.
+						                document.getElementById("sample5_address").value = addr;
+						                // 주소로 상세 정보를 검색
+						                geocoder.addressSearch(data.address, function(results, status) {
+						                    // 정상적으로 검색이 완료됐으면
+						                    if (status === daum.maps.services.Status.OK) {
+						
+						                        var result = results[0]; //첫번째 결과의 값을 활용
+						
+						                        // 해당 주소에 대한 좌표를 받아서
+						                        var coords = new daum.maps.LatLng(result.y, result.x);
+						                        // 지도를 보여준다.
+						                        mapContainer.style.display = "block";
+						                        map.relayout();
+						                        // 지도 중심을 변경한다.
+						                        map.setCenter(coords);
+						                        // 마커를 결과값으로 받은 위치로 옮긴다.
+						                        marker.setPosition(coords)
+						                    }
+						                });
+						            }
+						        }).open();
+						    }
+						</script>
+					</div>
+					<br><br>
+					<div>
+						<label for="classtitleimg" style="position: relative; font-weight: bold; font-size: 14px;">제공 및 유의사항</label> <br><br>
+						<div class="detailcontainer">
+							<!-- 1행 -->
+							<div class="detailitem">
+							    <input type="checkbox" id="checkbox1" name="checkboxGroup" style="width: 50px">
+							    <label for="checkbox1">와이파이를 제공해요</label>
+							</div>
+							<div class="detailitem">
+							    <input type="checkbox" id="checkbox2" name="checkboxGroup" style="width: 50px">
+							    <label for="checkbox2">포토존이 있어요</label>
+							</div>
+							<!-- 2행 -->
+							<div class="detailitem">
+							    <input type="checkbox" id="checkbox3" name="checkboxGroup" style="width: 50px">
+							    <label for="checkbox3">주차공간이 있어요</label>
+							</div>
+							<div class="detailitem">
+							    <input type="checkbox" id="checkbox4" name="checkboxGroup" style="width: 50px">
+							    <label for="checkbox4">반려동물 동반이 가능해요</label>
+							</div>
+							<!-- 3행 -->
+							<div class="detailitem">
+							    <input type="checkbox" id="checkbox5" name="checkboxGroup" style="width: 50px">
+							    <label for="checkbox5">간단한 음료 및 다과를 제공해요</label>
+							</div>
+							<div class="detailitem">
+							    <input type="checkbox" id="checkbox6" name="checkboxGroup" style="width: 50px">
+							    <label for="checkbox6">앞치마 및 장갑을 제공해요</label>
+							</div>
+							<!-- 4행 -->
+							<div class="detailitem">
+								<input type="checkbox" id="checkbox7" name="checkboxGroup" style="width: 50px">
+								<label for="checkbox7">포장 용기를 제공해요</label>
+							</div>
+						</div>
+						<br><br>
+						<label for="classtitleimg" style="position: relative; font-weight: bold; font-size: 14px;">건강 및 유의 사항</label> <br><br>
+						<div class="detailcontainer">
+							<!-- 1행 -->
+							<div class="detailitem">
+								<input type="checkbox" id="checkbox8" name="checkboxGroup" style="width: 50px">
+								<label for="checkbox8">손세정제가 비치 되어있어요</label>
+							</div>
+							<div class="detailitem">
+								<input type="checkbox" id="checkbox9" name="checkboxGroup" style="width: 50px">
+								<label for="checkbox9">아이 동반은 추천하지 않아요</label>
+							</div>
+							<!-- 2행 -->
+							<div class="detailitem">
+								<input type="checkbox" id="checkbox10" name="checkboxGroup" style="width: 50px">
+								<label for="checkbox10">실내 소독을 해요</label>
+							</div>
+							<div class="detailitem">
+								<input type="checkbox" id="checkbox11" name="checkboxGroup" style="width: 50px">
+								<label for="checkbox11">날카로운 도구들을 많이 사용해요</label>
+							</div>
+							<!-- 3행 -->
+							<div class="detailitem">
+								<input type="checkbox" id="checkbox12" name="checkboxGroup" style="width: 50px">
+								<label for="checkbox12">거리두기를 준수해요</label>
+							</div>
+						</div>
+					</div>
+					<br><br>
+					<div class="button-container2">
+						<button class="custom-button" onclick="previousStep(3)">이전</button>
+						<button class="custom-button" onclick="nextStep(3)">다음</button>
+					</div>
+				</form>
+			</div>
+		</div><!-- panel1 div -->
+		
+        <!-- 강사 등록하기 패널에 해당 jsp 파일 추가한 것. 이후 수정 필요 -->
+		<div id="panel2" class="panel-container">
+			<label for="title" style="font-weight: bold; font-size: 14px;">강사 소개</label><br>
+			<br>
+			<label id="notice" for="notice" style="font-size: 14px">해당 클래스의 강사님을 소개해주세요.</label><br>
+			<br><br>
+			<label for="classtitleimg" style="position: relative; ">강사 사진</label>
+			<label id="must" style="position: relative; " >(필수)</label> <br>
+
+			<div id="image-upload-container4" style="position: relative; display: inline-block; left:30px; "> <br>
+				<div id="image-frame7" style="width: 100px; height: 100px; border: 2px solid #ccc; cursor: pointer; position: relative;  background-color: #F2F2F2; border-radius: 5px; display: flex; flex-direction: column; justify-content: center; align-items: center;">
+					<img id="uploaded-image7" src="photoadd.png" style="max-width: 30%; max-height: 30%; " >
+					프로필<br>
+    			</div>
+    			<input type="file" id="image-upload7" style="position: absolute; width: 100%; height: 100%; top: 0; left: 0; opacity: 0; cursor: pointer; ">
+			</div>
+			<script>
+				document.getElementById('image-frame7').addEventListener('click', function() {
+				        document.getElementById('image-upload7').click();        
+				    });
+				    
+				document.getElementById('image-upload7').addEventListener('change', function() {
+				    var file = this.files[0];
+				    if (file) {
+				        var reader = new FileReader();
+				        reader.onload = function(e) {
+				            document.getElementById('image-frame7').innerHTML = '<img src="' + e.target.result + '" style="max-width: 100%; max-height: 100%;">';
+				        };
+				        reader.readAsDataURL(file);
+				    }
+				});
+			</script>
+
+			<br><br>
+			<label for="classforteacher">상호명 또는 닉네임</label> 
+			<input type="text" id="shopname" name="username" placeholder="상호명 또는 닉네임을 입력해 주세요." style="color: gray;"><br><br>
+			<br><br>
+			<label for="classintroduce">강사님 소개</label>
+   			<label id="must">(필수)</label> <br>
+			<input type="text" id="teacherintro" name="typingintro" placeholder="강사 소개를 입력해 주세요." style="color: gray; height: 300px;"><br><br>
+     		<br><br><br>
+			<div class="button-container2">
+				<button type="button" class="custom-button" onclick="previousStep(4)">이전</button>
+				<button class="custom-button" type="button"	 onclick="test()">저장하기</button>
+			<form name="addClassFrm" method="post" action="addClass" enctype="multipart/form-data">
+				<input type="hidden" id="classname" name="classname" value="">
+				<input type="hidden" id="classteacherinfo" name="classteacherinfo" value="">
+				<input type="hidden" id="offercontent" name="offercontent" value="">
+				<input type="hidden" id="categorygroup" name="categorygroup" value="">
+				<input type="hidden" id="categoryname" name="categoryname" value="">
+				<input type="hidden" id="classtime" name="classtime" value="">
+				<input type="hidden" id="address" name="address" value="">
+				<input type="hidden" id="addressdetail" name="addressdetail" value="">
+				<input type="hidden" id="classlevel" name="classlevel" value="">
+				<input type="hidden" id="classimg1" name ="classimg1" value="">
+				<input type="hidden" id="classimg2" name ="classimg2" value="">
+				<input type="hidden" id="classimg3" name ="classimg3" value="">
+				<input type="hidden" id="classimg4" name ="classimg4" value="">
+				<input type="hidden" id="classimg5" name ="classimg5" value="">
+				<input type="hidden" id="classcontent" name ="classcontent" value="">
+				<input type="hidden" id="classteacherimg" name ="classteacherimg" value="">
+				<input type="hidden" id="roomimg1" name ="roomimg1" value="">
+				<input type="hidden" id="rommimg2" name ="rommimg2" value="">
+				<input type="hidden" id="classstatus" name ="classstatus" value="">
+				<input type="hidden" id="classmin" name ="classmin" value="">
+				<input type="hidden" id="classmax" name ="classmax" value="">
+				<input type="hidden" id="classprice" name ="classprice" value="">
+				<input type="hidden" id="ids" name="ids" value="<%=id%>">
+				<div id="myModal" class="modal">
+  <div class="modal-content">
+    <span class="close" onclick="closeModal()">&times;</span>
+    <p>저장되었습니다!</p>
+  </div>
+</div>
+			</form>
+			</div>
+        </div>
+    </div>
+
+    <script>
+    function categoryChange(e) {
+        var cate2_a = ["케이크", "파이", "마카롱", "쿠키","머핀","버터 바","팬케이크","와플","기타"];
+        var cate2_b = ["크로와상", "베이글", "식빵", "바게트","호밀빵","호떡","롤케이크","기타"];
+        var cate2_c = ["에스프레소", "아메리카노", "카페라떼", "카푸치노", "모카","아이스 커피","라떼","마끼야또","콜드 브루","더치 커피","기타"];
+        var cate2_d = document.getElementById("cate2");
+
+        var target = cate2_d; // 수정: target 변수 정의
+
+        if(e.value == "제과") var d = cate2_a;
+        else if(e.value == "제빵") var d = cate2_b;
+        else if(e.value == "커피") var d = cate2_c;
+
+        target.options.length = 0;
+
+        for (var x in d) {
+           var opt = document.createElement("option");
+           opt.value = d[x];
+           opt.innerHTML = d[x];
+           target.appendChild(opt);
+        } 
+    }
+		function showPanel(panelId, buttonId) {
+			var panels = document.querySelectorAll('.panel-container');
+			panels.forEach(function(panel) {
+			    panel.classList.remove('active');
+			});
+			
+			var buttons = document.querySelectorAll('.button-container button');
+			buttons.forEach(function(button) {
+			    button.classList.remove('active');
+			});
+			
+			var currentPanel = document.getElementById(panelId);
+			currentPanel.classList.add('active');
+			
+			var currentButton = document.getElementById(buttonId);
+			currentButton.classList.add('active');
+		}
+		
+		function nextStep(currentStep) {
+			if (currentStep >= 3) {
+				showPanel('panel2', 'btnPanel2');
+				currentStep--;
+				return;
+			}
+			document.getElementById('step' + currentStep).classList.remove('active');
+			document.getElementById('step' + (currentStep + 1)).classList.add('active');
+		}
+	    
+		function previousStep(currentStep) {
+
+			if (currentStep >= 4) {
+				showPanel('panel1', 'btnPanel1');
+				currentStep--;
+				return;
+			}
+			document.getElementById('step' + currentStep).classList.remove('active');
+			document.getElementById('step' + (currentStep - 1)).classList.add('active');
+		}
+		
+
+		function test() {
+			var h1 = document.getElementById("classnames").value;
+	        var a1 = document.getElementById("teacherintro").value;
+	        var b1 = document.getElementById("shopname").value;
+	        var c1 = document.getElementById("cate1").value;
+	        var d1 = document.getElementById("cate2").value;
+	        var e1 = document.getElementById("classtimes").value;
+	        var selectedDifficulty = document.querySelector('input[name="difficulty"]:checked').value;
+	        var f1 = document.getElementById("minPerson").value;
+	        var f2 = document.getElementById("maxPerson").value;
+	        var g1 = document.getElementById("price").value;
+	        var i1 = document.getElementById("sample5_address").value;
+	        var i2 = document.getElementById("addressdetails").value;
+	        var imageFile = document.getElementById("image-upload").files[0];
+	        var imageFile2 = document.getElementById("image-upload2").files[0];
+	        var imageFile3 = document.getElementById("image-upload3").files[0];
+	        var imageFile4 = document.getElementById("image-upload4").files[0];
+	        var imageFile5 = document.getElementById("image-upload5").files[0];
+	        var imageFile6 = document.getElementById("image-upload6").files[0];
+	        var imageFile7 = document.getElementById("image-upload7").files[0];
+	        var imageFile8 = document.getElementById("image-upload8").files[0];
+	        var imageFile9 = document.getElementById("image-upload9").files[0];
+	        ///////////////////////////////////////////////////
+	        var checkboxes = document.querySelectorAll('input[name="checkboxGroup"]');
+	        var checkedItems = [];
+	        checkboxes.forEach(function(checkbox) {
+	            if (checkbox.checked) {
+	                checkedItems.push(1);
+	            } else {
+	                checkedItems.push(0);
+	            }
+	        });
+	        ////////////////////////////////////////////////
+	        
+	        if (imageFile != null) {
+		        var imageName = imageFile.name;
+		        var reader = new FileReader();
+		        reader.onload = function(e) {
+					reader.readAsDataURL(imageFile);
+	        	}
+		        document.getElementById("classimg1").value = imageName;
+	        }
+	        if (imageFile2 != null) {
+		        var imageName2 = imageFile2.name;
+		        var reader2 = new FileReader();
+		        reader2.onload = function(e) {
+					reader2.readAsDataURL(imageFile2);
+	        	}
+		        document.getElementById("classimg2").value = imageName2;
+	        }
+	        if (imageFile3 != null) {
+		        var imageName3 = imageFile3.name;
+		        var reader3 = new FileReader();
+		        reader3.onload = function(e) {
+					reader3.readAsDataURL(imageFile2);
+	        	}
+		        document.getElementById("classimg3").value = imageName3;
+	        }
+	        if (imageFile4 != null) {
+		        var imageName4 = imageFile4.name;
+		        var reader4 = new FileReader();
+		        reader4.onload = function(e) {
+					reader4.readAsDataURL(imageFile4);
+	        	}
+		        document.getElementById("classimg4").value = imageName4;
+	        }
+	        if (imageFile5 != null) {
+		        var imageName5 = imageFile5.name;
+		        var reader5 = new FileReader();
+		        reader5.onload = function(e) {
+					reader5.readAsDataURL(imageFile5);
+	        	}
+		        document.getElementById("classimg5").value = imageName5;
+	        }
+	        if (imageFile6 != null) {
+		        var imageName6 = imageFile6.name;
+		        var reader6 = new FileReader();
+		        reader6.onload = function(e) {
+					reader6.readAsDataURL(imageFile6);
+	        	}
+		        document.getElementById("classcontent").value = imageName6;
+	        }
+	        if (imageFile7 != null) {
+		        var imageName7 = imageFile7.name;
+		        var reader7 = new FileReader();
+		        reader7.onload = function(e) {
+					reader7.readAsDataURL(imageFile7);
+	        	}
+		        document.getElementById("classteacherimg").value = imageName7;
+	        }
+	        if (imageFile8 != null) {
+		        var imageName8 = imageFile8.name;
+		        var reader8 = new FileReader();
+		        reader8.onload = function(e) {
+					reader8.readAsDataURL(imageFile8);
+	        	}
+		        document.getElementById("roomimg1").value = imageName8;
+	        }
+	        if (imageFile9 != null) {
+		        var imageName9 = imageFile9.name;
+		        var reader9 = new FileReader();
+		        reader9.onload = function(e) {
+					reader9.readAsDataURL(imageFile9);
+	        	}
+		        document.getElementById("rommimg2").value = imageName9;
+	        }
+	        
+	        
+	        document.getElementById("classname").value = h1;
+	        document.getElementById("classteacherinfo").value = a1;
+	        document.getElementById("offercontent").value = b1;
+	        document.getElementById("categorygroup").value = c1;
+	        document.getElementById("categoryname").value = d1;
+	        document.getElementById("classtime").value = e1;
+	        document.getElementById("address").value = i1;
+	        document.getElementById("addressdetail").value = i2;
+	        document.getElementById("classmin").value = f1;
+	        document.getElementById("classmax").value = f2;
+	        document.getElementById("classlevel").value = selectedDifficulty;
+	        document.getElementById("classprice").value = g1;
+	        document.getElementById("classstatus").value = checkedItems.join(',');
+	        
+	        document.addClassFrm.submit();
+	   
+	            
+	        }	
+	</script>
+</body>
+</html>

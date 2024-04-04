@@ -1,0 +1,21 @@
+package onedaybacking;
+
+public class additemBean {
+    private int itemkey;
+    private String itemname;
+    private String itemdate;
+    private int itemprice;
+    private String itemlocation;
+    private String itemkeep;
+    private String itemperiod;
+    private String itemdelete;
+    private String itemimg;
+    private String itemimg1;
+    private String itemimg2;
+    private String itemimg3;
+    private String itemimg4;
+    private String itemcontent;
+    private String memberid;
+    private int categorykey;
+
+   }

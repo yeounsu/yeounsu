@@ -1,0 +1,35 @@
+<%@ page contentType="text/html; charset=UTF-8"%>
+<% request.setCharacterEncoding("UTF-8");%>
+<jsp:useBean id="iMgr" class="onedaybaking.additemMgr" />
+<jsp:useBean id="iBean" class="onedaybaking.additemBean" />
+<jsp:useBean id="caBean" class="onedaybaking.CateBean" />
+<jsp:useBean id="oBean" class="onedaybaking.OptionBean" />
+<jsp:setProperty name="iBean" property="*"/>
+<jsp:setProperty name="caBean" property="*"/>
+<jsp:setProperty property="*" name="oBean"/>
+<%
+	boolean flag1 = iMgr.insertCate(caBean);
+	int key = iMgr.getCatekey();
+	boolean flag = iMgr.insertItem(iBean, key);
+	boolean flag2 = iMgr.insertOption(oBean);
+%>
+<html>
+<head>
+<title>강의등록</title>
+<link href="yeounsu.css" rel="stylesheet" type="text/css">
+<html>
+<body bgcolor="#FFFFCC">
+<br/><br/>
+<div align="center">
+<%
+if(flag){
+	  out.println("<b>저장됨</b><p>");
+	  out.println("<a href=panel1.jsp>ㅊㅊ</a>");
+	}else{
+	  out.println("<b>다시 입력하여 주십시오.</b><p>");
+	  out.println("<a href=additem.jsp>다시 가입</a>");
+	}
+%>
+</div>
+</body>
+</html>

@@ -1,0 +1,10 @@
+<%@ page contentType="text/html; charset=UTF-8"%>
+
+<%
+	String a = request.getParameter("a");
+	String b = request.getParameter("b");
+	String c = request.getParameter("c");
+%>
+<script>
+alert("<%=a + " " + b + " " + c%>");
+</script>

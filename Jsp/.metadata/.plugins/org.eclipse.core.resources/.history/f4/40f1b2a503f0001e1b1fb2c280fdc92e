@@ -1,0 +1,31 @@
+<%@ page contentType="text/html; charset=UTF-8"%>
+
+<% request.setCharacterEncoding("UTF-8");%>
+<jsp:useBean id="cMgr" class="onedaybacking.addclassMgr" />
+<jsp:useBean id="cBean" class="onedaybacking.ClassBean" />
+<jsp:setProperty name="cBean" property="*"/>
+<%
+	boolean flag = cMgr.insertClass(cBean);
+	boolean flag = cMgr.insertCate(;)
+%>
+<html>
+<head>
+<title>강의등록</title>
+<link href="yeounsu.css" rel="stylesheet" type="text/css">
+<html>
+<body bgcolor="#FFFFCC">
+<br/><br/>
+<div align="center">
+<%
+if(flag){
+	  out.println("<b>저장됨</b><p>");
+	  out.println("<a href=panel1.jsp>ㅊㅊ</a>");
+	}else{
+	  out.println("<b>다시 입력하여 주십시오.</b><p>");
+	  out.println("<a href=addClass.jsp>다시 가입</a>");
+	}
+%>
+</div>
+</body>
+</html>
+

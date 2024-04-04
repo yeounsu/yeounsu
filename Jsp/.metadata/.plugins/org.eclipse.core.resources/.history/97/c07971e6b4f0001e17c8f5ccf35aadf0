@@ -1,0 +1,60 @@
+<%@ page contentType="text/html; charset=UTF-8"%>
+<% request.setCharacterEncoding("UTF-8");%>
+<jsp:useBean id="iMgr" class="onedaybaking.additemMgr" />
+<jsp:useBean id="iBean" class="onedaybaking.additemBean" />
+<jsp:useBean id="caBean" class="onedaybaking.CateBean" />
+<jsp:useBean id="oBean" class="onedaybaking.OptionBean" />
+<jsp:setProperty name="iBean" property="*"/>
+<jsp:setProperty name="caBean" property="*"/>
+<jsp:setProperty property="*" name="oBean"/>
+<script>
+function showModal() {
+    // 배경과 안내창을 보이게 함
+    document.getElementById("overlay").style.display = "block";
+    document.getElementById("modal").style.display = "block";
+<%
+	String id = (String)session.getAttribute("idKey");
+	boolean flag1 = iMgr.insertCate(caBean);
+	int key = iMgr.getCatekey();
+	int ikey = iMgr.getitemkey();
+	boolean flag = iMgr.insertItem(iBean, key, id);
+	boolean flag2 = iMgr.insertOption(oBean, ikey);
+%>
+// 일정 시간이 지나면 안내창을 닫음 (테스트용)
+setTimeout(function() {
+    closeModal();
+}, 3000); // 3초 후에 닫음
+}
+
+function closeModal() {
+// 배경과 안내창을 숨김
+document.getElementById("overlay").style.display = "none";
+document.getElementById("modal").style.display = "none";
+}
+</script>
+
+<!-- 저장하기 버튼 -->
+<div class="button-container2">
+<input class="custom-button" type="button" value="저장하기" onclick="showModal()">
+</div>
+
+<!-- 배경과 안내창 -->
+<div class="overlay" id="overlay"></div>
+<div class="modal" id="modal">
+<h2>저장 중...</h2>
+<!-- 저장 중임을 안내하는 내용 추가 -->
+</div>
+
+<!-- 저장 결과를 표시할 부분 -->
+<div align="center">
+<%
+// 저장 결과에 따라 메시지 출력
+if(flag){
+    out.println("<b>저장됨</b><p>");
+    out.println("<a href=panel1.jsp>ㅊㅊ</a>");
+} else{
+    out.println("<b>다시 입력하여 주십시오.</b><p>");
+    out.println("<a href=additem.jsp>다시 가입</a>");
+}
+%>
+</div>

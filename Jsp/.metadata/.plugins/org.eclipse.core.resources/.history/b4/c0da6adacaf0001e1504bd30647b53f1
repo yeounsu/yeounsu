@@ -1,0 +1,173 @@
+package onedaybaking;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+
+import javax.servlet.http.HttpServletRequest;
+
+import com.oreilly.servlet.MultipartRequest;
+import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
+
+public class additemMgr {
+	private DBConnectionMgr pool;
+	//업로드 파일 저장 위치
+	public static final String SAVEFOLDER="C:/Jsp/myapp/src/main/webapp/onedaybacking/img/";
+	//업로드 파일 인코딩
+	public static final String ENCODING="UTF-8";
+	public static final int MAXSIZE = 1024 * 1024 * 20; //20MB
+	
+	public additemMgr() {
+		pool = DBConnectionMgr.getInstance();
+	}
+	
+	public boolean insertItem(HttpServletRequest req, int categoryKey, String id) {
+	    Connection con = null;
+	    PreparedStatement pstmt = null;
+	    String sql = null;
+	    boolean flag = false;
+	    try {
+	        con = pool.getConnection();
+	        MultipartRequest multi = new MultipartRequest(req, SAVEFOLDER, MAXSIZE, ENCODING, new DefaultFileRenamePolicy());
+	        sql = "INSERT INTO item (itemkey, itemname, itemdate, itemprice, itemlocation, itemkeep, itemperiod, itemdelete, itemimg, itemimg1, itemimg2, itemimg3, itemimg4, itemcontent, memberid, categorykey) VALUES (null, ?, now(), ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?)";
+	        pstmt = con.prepareStatement(sql);
+	        pstmt.setString(1, multi.getParameter("itemname"));
+	        pstmt.setInt(2, Integer.parseInt(multi.getParameter("itemprice")));
+	        pstmt.setString(3, multi.getParameter("itemlocation"));
+	        pstmt.setString(4, multi.getParameter("itemkeep"));
+	        pstmt.setString(5, multi.getParameter("itemperiod"));
+	        pstmt.setString(6, "N");
+	        pstmt.setString(7, "");
+	        pstmt.setString(8, "");
+	        pstmt.setString(9, "");
+	        pstmt.setString(10, "");
+	        pstmt.setString(11, "");
+	        pstmt.setString(12, "");
+	        pstmt.setString(13, id);
+	        pstmt.setInt(14, categoryKey); 
+
+	        if(pstmt.executeUpdate() == 1)
+	            flag = true;
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	    } finally {
+	        pool.freeConnection(con, pstmt);
+	    }
+	    return flag;
+	}
+
+	public boolean insertCate(HttpServletRequest req) {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		String sql = null;
+		boolean flag1 = false;
+		try {
+			con = pool.getConnection();
+			MultipartRequest multi = new MultipartRequest(req, SAVEFOLDER, MAXSIZE, ENCODING, new DefaultFileRenamePolicy());
+			sql = "insert into category (categorygroup, categoryname) values (?,?)";
+			 pstmt = con.prepareStatement(sql);
+	            pstmt.setString(1, multi.getParameter("categorygroup"));
+	            pstmt.setString(2, multi.getParameter("categoryname"));
+	            
+			if(pstmt.executeUpdate()==1)
+				flag1 = true;
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			pool.freeConnection(con, pstmt);
+		}
+		return flag1;
+	}
+
+	public int getCatekey() {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql = null;
+		int num = 0;
+		try {
+			con = pool.getConnection();
+			sql = "select * from category order by categorykey desc";
+			pstmt = con.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			if (rs.next()) num = rs.getInt(1);
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			pool.freeConnection(con, pstmt, rs);
+		}
+		return num;
+	}
+	
+	public int getitemkey() {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql = null;
+		int num = 0;
+		try {
+			con = pool.getConnection();
+			sql = "select * from item order by itemkey desc";
+			pstmt = con.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			if (rs.next()) num = rs.getInt(1);
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			pool.freeConnection(con, pstmt, rs);
+		}
+		return num;
+	}
+	
+	public boolean insertOption(HttpServletRequest req, int itemkey) {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		String sql = null;
+		boolean flag2 = false;	
+		try {
+			con = pool.getConnection();
+			MultipartRequest multi = new MultipartRequest(req, SAVEFOLDER, MAXSIZE, ENCODING, new DefaultFileRenamePolicy());
+			sql = "insert into itemoption (itemoption1, itemoption2, itemoption3,itemoption4,itemoption5,itemoption6,itemoption7,itemoption8,itemoption9,itemoption10,itemsoption1,itemsoption2,itemsoption3,itemsoption4,itemsoption5,itemsoption6,itemsoption7,itemsoption8,itemsoption9,itemsoption10,itemkey) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+			 pstmt = con.prepareStatement(sql);
+			 int a = 1;
+			 for (int i = 1; i <= 20; i++) {
+				 if (i > 10) {
+					 pstmt.setString(i, multi.getParameter("itemsoption" + a));
+					 a++;
+				 } else {
+					 pstmt.setString(i, multi.getParameter("itemoption" + i));
+				 }
+				
+			}
+	            
+	            pstmt.setInt(21, itemkey);
+			if(pstmt.executeUpdate()==1)
+				flag2 = true;
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			pool.freeConnection(con, pstmt);
+		}
+		return flag2;
+	}
+	
+	public boolean allInsertItem(HttpServletRequest req, String id) {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql = null;
+		boolean flag = false;
+		try {
+			con = pool.getConnection();
+			sql = "";
+			pstmt = con.prepareStatement(sql);
+
+			rs = pstmt.executeQuery();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			pool.freeConnection(con, pstmt, rs);
+		}
+		return flag;
+	}
+}

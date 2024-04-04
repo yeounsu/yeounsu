@@ -1,0 +1,27 @@
+<%@page import="onedaybaking.ClassBean2"%>
+<%@page import="onedaybaking.UtilMgr"%>
+<jsp:useBean id="mgr" class="onedaybaking.WishMgr"/>
+<%@ page import="onedaybaking.ClassBean"%>
+<%@ page import="java.util.Vector"%>
+<%@ page contentType="text/plain; charset=UTF-8"%>
+<%
+	String memberId = (String)session.getAttribute("idKey");
+	Vector<ClassBean2> cvlist = mgr.getWishClassList(memberId);
+	StringBuilder json = new StringBuilder();
+	json.append("[");
+	
+	for (int i = 0; i < cvlist.size(); i++) {
+		ClassBean2 cbean = cvlist.get(i);
+		json.append("{");
+		json.append("\"classkey\":\"").append(cbean.getClasskey()).append("\",");
+		json.append("\"classname\":\"").append(cbean.getClassname()).append("\",");
+		json.append("\"membername\":\"").append(cbean.getMembername()).append("\",");
+		json.append("\"classprice\":\"").append(UtilMgr.numbering(cbean.getClassprice())).append("\"");
+		json.append("}");
+		if (i < cvlist.size() - 1) {
+			json.append(",");
+		}
+	}
+	json.append("]");
+	out.print(json.toString());
+%>

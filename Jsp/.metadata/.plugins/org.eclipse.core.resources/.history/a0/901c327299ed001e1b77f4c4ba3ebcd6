@@ -1,0 +1,55 @@
+<%@ page contentType="text/html; charset=EUC-KR"%>
+<%
+	String a = request.getParameter("a");
+	String b = request.getParameter("b");
+	String c = request.getParameter("c");
+	String d = request.getParameter("d");
+	String e = request.getParameter("e");
+	String difficulty = request.getParameter("difficulty");
+	String imageName = request.getParameter("imageName");
+	String imageName2 = request.getParameter("imageName2");
+	String imageName3 = request.getParameter("imageName3");
+	String imageName4 = request.getParameter("imageName4");
+	String imageName5 = request.getParameter("imageName5");
+	String imageName6 = request.getParameter("imageName6");
+	String imageName7 = request.getParameter("imageName7");
+	String imageName8 = request.getParameter("imageName8");
+	String imageName9 = request.getParameter("imageName9");
+	String[] checkedItems = request.getParameterValues("checkedItems");
+	String f11 = request.getParameter("f11");
+	String f22 = request.getParameter("f22");
+	String g = request.getParameter("g");
+%>
+<%=a %><br>
+<%=b %><br>
+<%=c %><br>
+<%=d %><br>
+<%=e %><br>
+<%=difficulty %><br>
+<%=imageName %><br>
+<%=imageName2 %><br>
+<%=imageName3 %><br>
+<%=imageName4 %><br>
+<%=imageName5 %><br>
+<%=imageName6 %><br>
+<%=imageName7 %><br>
+<%=imageName8 %><br>
+<%=imageName9 %><br>
+<%=f11 %><br>
+<%=f22 %><br>
+<%=g %><br>
+<%= result.toString() %>
+
+
+
+
+<!--
+
+
+id값 겹치는거 다 바꿔주는중!!!
+step1까지 끝
+
+
+ -->
+ 
+ 

@@ -1,0 +1,62 @@
+<%@ page contentType="text/html; charset=EUC-KR"%>
+<%
+	String classname = request.getParameter("classname");
+	String classteacherinfo = request.getParameter("classteacherinfo");
+	String offercontent = request.getParameter("offercontent");
+	String categorygroup = request.getParameter("categorygroup");
+	String categoryname = request.getParameter("categoryname");
+	String classtime = request.getParameter("classtime");
+	String address = request.getParameter("address");
+	String addressdetail = request.getParameter("addressdetail");
+	
+	String classlevel = request.getParameter("classlevel");
+	String classimg1 = request.getParameter("classimg1");
+	String classimg2 = request.getParameter("classimg2");
+	String classimg3 = request.getParameter("classimg3");
+	String classimg4 = request.getParameter("classimg4");
+	String classimg5 = request.getParameter("classimg5");
+	String classcontent = request.getParameter("classcontent");
+	String classteacherimg = request.getParameter("classteacherimg");
+	String roomimg1 = request.getParameter("roomimg1");
+	String rommimg2 = request.getParameter("rommimg2");
+	String[] checkedItems = request.getParameterValues("checkedItems");
+	String classmin = request.getParameter("classmin");
+	String classmax = request.getParameter("classmax");
+	String gclassprice = request.getParameter("classprice");
+%>
+<%=h %><br>
+<%=a %><br>
+<%=b %><br>
+<%=c %><br>
+<%=d %><br>
+<%=e %><br>
+<%=i11 %><br>
+<%=i22 %><br>
+<%=difficulty %><br>
+<%=imageName %><br>
+<%=imageName2 %><br>
+<%=imageName3 %><br>
+<%=imageName4 %><br>
+<%=imageName5 %><br>
+<%=imageName6 %><br>
+<%=imageName7 %><br>
+<%=imageName8 %><br>
+<%=imageName9 %><br>
+<%=f11 %><br>
+<%=f22 %><br>
+<%=g %><br>
+<% for (String classstatus : checkedItems) { %>
+    <%=classstatus %>
+<% } %>
+
+
+<!--
+
+
+id값 겹치는거 다 바꿔주는중!!!
+step1까지 끝
+
+
+ -->
+ 
+ 

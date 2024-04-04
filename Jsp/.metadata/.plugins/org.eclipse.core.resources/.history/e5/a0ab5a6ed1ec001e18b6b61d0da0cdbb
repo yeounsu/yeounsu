@@ -1,0 +1,21 @@
+<%@ page contentType="text/html; charset=UTF-8"%>
+
+<%
+	String a = request.getParameter("a");
+	String b = request.getParameter("b");
+%>
+<script>
+alert("<%=a + " " + b%>");
+</script>
+<html>
+<head>
+<title>강의등록</title>
+<link href="yeounsu.css" rel="stylesheet" type="text/css">
+<html>
+<body bgcolor="#FFFFCC">
+<br/><br/>
+<div align="center">
+</div>
+</body>
+</html>
+

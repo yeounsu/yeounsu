@@ -1,0 +1,36 @@
+package onedaybaking;
+
+import java.io.IOException;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+
+@WebServlet("/onedaybaking/addClass")
+public class addClassServlet extends HttpServlet {
+    private static final long serialVersionUID = 1L;
+
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        HttpSession session = request.getSession();
+        String id  = (String) session.getAttribute("idkey");
+
+        // 클라이언트로부터 받은 데이터 추출
+        String className = request.getParameter("classname");
+        String teacherIntro = request.getParameter("teacherintro");
+        String shopName = request.getParameter("shopname");
+        // 추가적으로 필요한 데이터를 추출하여 처리
+
+        // addclassMgr를 사용하여 데이터 처리
+        addclassMgr acMgr = new addclassMgr();
+        acMgr.allInsertClass(classname, classdate, classmin, classmax, classprice, classtime, address, addressdetail,offercontent, classstatus, classdelete, classteacherinfo, classteacherimg, classimg1, classimg2, classimg3, classimg4, classimg5, classcontent, roomimg1, roomimg2, memberid, categorykey, membername, classteachername);
+        // 메서드 파라미터로 필요한 데이터를 전달하여 처리
+
+        // 클라이언트에게 응답
+        response.setContentType("text/plain");
+        response.setCharacterEncoding("UTF-8");
+        response.getWriter().write("Data saved successfully!");
+    }
+}

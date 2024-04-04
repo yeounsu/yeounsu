@@ -1,0 +1,48 @@
+package onedaybaking;
+
+import java.io.IOException;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+@WebServlet("/onedaybaking/addClass")
+public class addClassServlet extends HttpServlet {
+    private static final long serialVersionUID = 1L;
+
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        HttpSession session = request.getSession();
+        String id = (String) session.getAttribute("idkey");
+
+        // 클라이언트로부터 받은 데이터 추출
+        String className = request.getParameter("classname");
+        String teacherIntro = request.getParameter("teacherintro");
+        String shopName = request.getParameter("shopname");
+        String classDate = request.getParameter("classdate"); // 예시: 클래스 날짜
+        String classMin = request.getParameter("classmin"); // 예시: 최소 수강인원
+        String classMax = request.getParameter("classmax"); // 예시: 최대 수강인원
+        String classPrice = request.getParameter("classprice"); // 예시: 클래스 가격
+        String classTime = request.getParameter("classtime"); // 예시: 클래스 시간
+        String address = request.getParameter("address"); // 예시: 주소
+        String addressDetail = request.getParameter("addressdetail"); // 예시: 상세 주소
+        String offerContent = request.getParameter("offercontent"); // 예시: 제공 내용
+        String classStatus = request.getParameter("classstatus"); // 예시: 클래스 상태
+        String classDelete = request.getParameter("classdelete"); // 예시: 클래스 삭제 여부
+        String classTeacherImg = request.getParameter("classteacherimg"); // 예시: 강사 이미지
+        String classImg1 = request.getParameter("classimg1"); // 예시: 클래스 이미지 1
+        String classImg2 = request.getParameter("classimg2"); // 예시: 클래스 이미지 2
+        // 나머지 데이터도 동일하게 추출하시면 됩니다.
+
+        // addclassMgr를 사용하여 데이터 처리
+        addclassMgr acMgr = new addclassMgr();
+        acMgr.allInsertClass(className, classDate, classMin, classMax, classPrice, classTime, address, addressDetail, offerContent, classStatus, classDelete, teacherIntro, classTeacherImg, classImg1, classImg2, id, "categoryKey값", "memberName", "classTeacherName");
+        // 메서드 파라미터로 필요한 데이터를 전달하여 처리
+
+        // 클라이언트에게 응답
+        response.setContentType("text/plain");
+        response.setCharacterEncoding("UTF-8");
+        response.getWriter().write("Data saved successfully!");
+    }
+}
