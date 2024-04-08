@@ -1,0 +1,26 @@
+<%@page import="onedaybaking.UtilMgr"%>
+<jsp:useBean id="mgr" class="onedaybaking.WishMgr"/>
+<%@ page import="onedaybaking.ClassBean"%>
+<%@ page import="java.util.Vector"%>
+<%@ page contentType="text/plain; charset=UTF-8"%>
+<%
+	String memberId = (String)session.getAttribute("idKey");
+	Vector<ClassBean> ivlist = mgr.getWishItemList(memberId);
+	StringBuilder json = new StringBuilder();
+	json.append("[");
+	
+	for (int i = 0; i < ivlist.size(); i++) {
+		ClassBean ibean = ivlist.get(i);
+		json.append("{");
+		json.append("\"classkey\":\"").append(ibean.getClasskey()).append("\",");
+		json.append("\"classname\":\"").append(ibean.getClassname()).append("\",");
+		json.append("\"classcontent\":\"").append(ibean.getClasscontent()).append("\",");
+		json.append("\"classprice\":\"").append(UtilMgr.numbering(ibean.getClassprice())).append("\"");
+		json.append("}");
+		if (i < ivlist.size() - 1) {
+			json.append(",");
+		}
+	}
+	json.append("]");
+	out.print(json.toString());
+%>
